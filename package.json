@@ -1,0 +1,25 @@
+{
+  "name": "proctora-backend",
+  "version": "1.0.0",
+  "description": "Backend Codebase for Proctora - An Online Assessment and Proctoring Platform",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AyushSrivastava0609/Proctora-Backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AyushSrivastava0609/Proctora-Backend/issues"
+  },
+  "homepage": "https://github.com/AyushSrivastava0609/Proctora-Backend#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.1",
+    "mongoose": "^8.8.2"
+  }
+}
