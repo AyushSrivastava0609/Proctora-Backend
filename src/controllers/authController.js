@@ -14,7 +14,7 @@ exports.registerUser = async (req, res) => {
       email,
       phone,
       password,
-      photo: req.file?.location,
+      // photo: req.file?.location,
     });
 
     await newUser.save();
