@@ -29,6 +29,6 @@ const router = express.Router();
 // });
 
 router.post('/register', registerUser);
-router.post('/login', loginUser);
+router.post('/userLogin', loginUser);
 
 module.exports = router;
