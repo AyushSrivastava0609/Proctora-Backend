@@ -64,10 +64,10 @@ const sendTestNotificationEmails = (candidateEmails, testType , testName, testDu
           <table>
             <tr><td>Test Name</td><td>${testName}</td></tr>
             <tr><td>Test Type</td><td>${testType}</td></tr>
+            <tr><td>Test Description</td><td>${testDescription}</td></tr>
             <tr><td>Test Duration</td><td>${testDuration} minutes</td></tr>
             <tr><td>Test Start Time</td><td>${startsOn}</td></tr>
             <tr><td>Test End Time</td><td>${endsOn}</td></tr>
-            <tr><td>Test Description</td><td>${testDescription}</td></tr>
           </table>
           <p>Please Ensure that you Complete the Test within the given Time Frame. If you have any Questions, Feel Free to Reach out to the Test Administrator.</p>
           <p>Best Regards,<br>Proctora Team</p>
@@ -92,4 +92,25 @@ const sendTestNotificationEmails = (candidateEmails, testType , testName, testDu
       });
     });
   };
+
+//   -----------------------------------------------------------------------------------------   \\
+
+exports.getTest = async (req, res) => {
+    const Tests = await Test.find();
+    if(Tests){
+        res.status(200).send(Tests)
+    }else{
+        res.status(404).json({ message: 'No Tests Found' });
+    }
+}
+
+exports.getTestById = async(req, res) => {
+    const {id} = req.params;
+    const test = await Test.findById(id);
+    if(test){
+        res.status(200).send(test)
+    }else{
+        res.status(404).json({ message: 'No Test Found' });
+    }
+}
   
