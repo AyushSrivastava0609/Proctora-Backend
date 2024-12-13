@@ -1,5 +1,6 @@
 const nodemailer = require('nodemailer');
 const Test = require('../models/test');
+const Submission = require('../models/submission');
 
 exports.createTest = async (req, res) => {
   const {
@@ -132,6 +133,45 @@ exports.modifyTest = async (req, res) => {
   } catch (error) {
       console.error('Error updating test:', error);
       res.status(500).json({ message: 'Server Error' });
+  }
+};
+
+//   -----------------------------------------------------------------------------------------   \\
+
+exports.submitTest = async (req, res) => {
+  try {
+    const { testId, userId, userName, answers } = req.body;
+
+    const test = await Test.findById(testId);
+    if (!test) {
+      return res.status(404).json({ message: 'Test not found' });
+    }
+
+    let score = 0;
+    test.questions.forEach((question) => {
+      const userAnswer = answers.find((ans) => ans.questionId === question._id.toString());
+      if (userAnswer && userAnswer.selectedOption === question.correctOption) {
+        score+=4;
+      }else{
+        score-=1;
+      }
+    });
+
+    const submission = await Submission.create({
+      userName,
+      userId,
+      testId,
+      answers,
+      score
+    });
+
+    res.status(200).json({
+      message: 'Test Submitted Successfully',
+      submission
+    });
+  } catch (error) {
+    console.error('Error Submitting Test:', error);
+    res.status(500).json({ message: 'Server error' });
   }
 };
 
