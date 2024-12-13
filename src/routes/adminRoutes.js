@@ -2,9 +2,8 @@ const express = require('express');
 const router = express.Router();
 const authorizeAdmin = require('../middlewares/authorizedAdmin');
 
-const { loginAdmin, getAdminTest } = require('../controllers/adminController');
+const { loginAdmin } = require('../controllers/adminController');
 
-router.post('/adminLogin', loginAdmin)
-router.get('/admintests', authorizeAdmin, getAdminTest );
+router.post('/adminLogin', loginAdmin);
 
 module.exports = router;

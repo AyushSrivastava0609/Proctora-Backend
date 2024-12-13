@@ -22,12 +22,3 @@ exports.loginAdmin = async (req, res) => {
         res.status(500).json({ message: 'Server Error' });
     }
 };
-
-exports.getAdminTest = async (req, res) => {
-    const Tests = await Test.find();
-    if(Tests){
-        res.status(200).send(Tests)
-    }else{
-        res.status(404).json({ message: 'No Tests Found' });
-    }
-}

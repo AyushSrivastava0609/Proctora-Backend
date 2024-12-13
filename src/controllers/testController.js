@@ -113,4 +113,26 @@ exports.getTestById = async(req, res) => {
         res.status(404).json({ message: 'No Test Found' });
     }
 }
+
+exports.modifyTest = async (req, res) => {
+  try {
+      const { id } = req.params; 
+      const updatedData = req.body; 
+
+      const updatedTest = await Test.findByIdAndUpdate(id, updatedData, {
+          new: true,
+          runValidators: true,
+      });
+
+      if (updatedTest) {
+          res.status(200).json({ message: 'Test Updated Successfully', test: updatedTest });
+      } else {
+          res.status(404).json({ message: 'No Test Found with the given ID' });
+      }
+  } catch (error) {
+      console.error('Error updating test:', error);
+      res.status(500).json({ message: 'Server Error' });
+  }
+};
+
   
